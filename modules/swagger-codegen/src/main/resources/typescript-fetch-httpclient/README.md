@@ -1,11 +1,12 @@
-# TypeScript-Fetch
+# TypeScript-Fetch-HttpClient
 
-This generator creates TypeScript/JavaScript client that utilizes [Fetch API](https://fetch.spec.whatwg.org/). The generated Node module can be used in the following environments: 
+This generator creates TypeScript/JavaScript client that utilizes [Fetch API](https://fetch.spec.whatwg.org/) with the [Aurelia](http://aurelia.io/) HttpClient. The generated Node module can be used in the following environments:
 
 Environment
 * Node.js
 * Webpack
 * Browserify
+* Aurelia
 
 Language level
 * ES5 - you must have a Promises/A+ library installed
@@ -16,6 +17,38 @@ Module system
 * ES6 module system
 
 It can be used in both TypeScript and JavaScript. In TypeScript, the definition should be automatically resolved via `package.json`. ([Reference](http://www.typescriptlang.org/docs/handbook/typings-for-npm-packages.html))
+
+#### Generation ####
+You can generate a client over command line by querying the `swagger-codegen` command with the `typescript-fetch-httpclient` language option.
+```
+swagger-codegen generate -i swagger.json -l typescript-fetch-httpclient -o output/
+java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i http://localhost:9090/swagger.json -l typescript-fetch-httpclient -o ../porrima-webapp/webapp/src/gen --additional-properties=supportsES6=true
+```
+
+As input it expexts a swagger JSON deinition file. This definition should contain a description of your server API. You can get this definition from the swagger editor or from your webservice.
+The generated output contains all needed project files (package.json, tsconfig.json, ...) and a single source file `api.ts`. This source file will contain the whole generated client API
+with model classes and the client server communication handling.
+
+You can build a independend module from this sources or copy it tou your client project that should query the server API.
+
+#### Usage of generated Code ####
+for example
+```
+import * as client from 'gen/api.ts';
+```
+
+```
+  const api = client.CarApiFactory( );
+  // get 10 cars from server
+  api.carsGetCars({size: 10}).then((response: client.Car[]): any => {
+          response.forEach((ccar: client.Car) => {
+              // do something with the data objects from the server
+          });
+      }
+  }).catch((error): any => {
+      // error handling
+  });
+```
 
 ### Installation ###
 

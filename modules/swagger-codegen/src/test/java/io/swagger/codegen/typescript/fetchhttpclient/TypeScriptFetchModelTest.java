@@ -1,4 +1,4 @@
-package io.swagger.codegen.typescript.fetch;
+package io.swagger.codegen.typescript.fetchhttpclient;
 
 import com.google.common.collect.Sets;
 
@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import io.swagger.codegen.CodegenModel;
 import io.swagger.codegen.CodegenProperty;
 import io.swagger.codegen.DefaultCodegen;
-import io.swagger.codegen.languages.TypeScriptFetchClientCodegen;
+import io.swagger.codegen.languages.TypeScriptFetchHttpClientCodegen;
 import io.swagger.models.ArrayModel;
 import io.swagger.models.Model;
 import io.swagger.models.ModelImpl;
@@ -32,7 +32,7 @@ public class TypeScriptFetchModelTest {
                 .property("birthDate", new DateProperty())
                 .required("id")
                 .required("name");
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -88,7 +88,7 @@ public class TypeScriptFetchModelTest {
                 .property("id", new LongProperty())
                 .property("urls", new ArrayProperty().items(new StringProperty()))
                 .required("id");
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -121,7 +121,7 @@ public class TypeScriptFetchModelTest {
         final Model model = new ModelImpl()
                 .description("a sample model")
                 .property("children", new RefProperty("#/definitions/Children"));
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -145,7 +145,7 @@ public class TypeScriptFetchModelTest {
                 .description("a sample model")
                 .property("children", new ArrayProperty()
                         .items(new RefProperty("#/definitions/Children")));
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -168,7 +168,7 @@ public class TypeScriptFetchModelTest {
         final Model model = new ArrayModel()
                 .description("an array model")
                 .items(new RefProperty("#/definitions/Children"));
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -182,7 +182,7 @@ public class TypeScriptFetchModelTest {
         final Model model = new ModelImpl()
                 .description("a map model")
                 .additionalProperties(new RefProperty("#/definitions/Children"));
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final CodegenModel cm = codegen.fromModel("sample", model);
 
         Assert.assertEquals(cm.name, "sample");
@@ -196,7 +196,7 @@ public class TypeScriptFetchModelTest {
     @Test(description = "test enum array model")
     public void enumArrayMdoelTest() {
         final Swagger model =  new SwaggerParser().read("src/test/resources/2_0/petstore-with-fake-endpoints-models-for-testing.yaml");
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final Model definition = model.getDefinitions().get("EnumArrays");
 
         Property property =  definition.getProperties().get("array_enum");
@@ -230,7 +230,7 @@ public class TypeScriptFetchModelTest {
     @Test(description = "test enum model for values (numeric, string, etc)")
     public void enumMdoelValueTest() {
         final Swagger model =  new SwaggerParser().read("src/test/resources/2_0/petstore-with-fake-endpoints-models-for-testing.yaml");
-        final DefaultCodegen codegen = new TypeScriptFetchClientCodegen();
+        final DefaultCodegen codegen = new TypeScriptFetchHttpClientCodegen();
         final Model definition = model.getDefinitions().get("Enum_Test");
 
         Property property =  definition.getProperties().get("enum_integer");

@@ -1,19 +1,19 @@
-package io.swagger.codegen.typescript.fetch;
+package io.swagger.codegen.typescript.fetchhttpclient;
 
 import io.swagger.codegen.AbstractOptionsTest;
 import io.swagger.codegen.CodegenConfig;
-import io.swagger.codegen.languages.TypeScriptFetchClientCodegen;
-import io.swagger.codegen.options.TypeScriptFetchClientOptionsProvider;
+import io.swagger.codegen.languages.TypeScriptFetchHttpClientCodegen;
+import io.swagger.codegen.options.TypeScriptFetchHttpClientOptionsProvider;
 import mockit.Expectations;
 import mockit.Tested;
 
-public class TypeScriptFetchClientOptionsTest extends AbstractOptionsTest {
+public class TypeScriptFetchHttpClientOptionsTest extends AbstractOptionsTest {
 
     @Tested
-    private TypeScriptFetchClientCodegen clientCodegen;
+    private TypeScriptFetchHttpClientCodegen clientCodegen;
 
-    public TypeScriptFetchClientOptionsTest() {
-        super(new TypeScriptFetchClientOptionsProvider());
+    public TypeScriptFetchHttpClientOptionsTest() {
+        super(new TypeScriptFetchHttpClientOptionsProvider());
     }
 
     @Override
@@ -25,11 +25,11 @@ public class TypeScriptFetchClientOptionsTest extends AbstractOptionsTest {
     @Override
     protected void setExpectations() {
         new Expectations(clientCodegen) {{
-            clientCodegen.setSortParamsByRequiredFlag(Boolean.valueOf(TypeScriptFetchClientOptionsProvider.SORT_PARAMS_VALUE));
+            clientCodegen.setSortParamsByRequiredFlag(Boolean.valueOf(TypeScriptFetchHttpClientOptionsProvider.SORT_PARAMS_VALUE));
             times = 1;
-            clientCodegen.setModelPropertyNaming(TypeScriptFetchClientOptionsProvider.MODEL_PROPERTY_NAMING_VALUE);
+            clientCodegen.setModelPropertyNaming(TypeScriptFetchHttpClientOptionsProvider.MODEL_PROPERTY_NAMING_VALUE);
             times = 1;
-            clientCodegen.setSupportsES6(TypeScriptFetchClientOptionsProvider.SUPPORTS_ES6_VALUE);
+            clientCodegen.setSupportsES6(TypeScriptFetchHttpClientOptionsProvider.SUPPORTS_ES6_VALUE);
             times = 1;
         }};
     }

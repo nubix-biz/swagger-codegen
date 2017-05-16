@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
-public class TypeScriptFetchClientCodegen extends AbstractTypeScriptClientCodegen {
+public class TypeScriptFetchHttpClientCodegen extends AbstractTypeScriptClientCodegen {
 
     public static final String NPM_NAME = "npmName";
     public static final String NPM_VERSION = "npmVersion";
@@ -18,15 +18,15 @@ public class TypeScriptFetchClientCodegen extends AbstractTypeScriptClientCodege
     protected String npmName = null;
     protected String npmVersion = "1.0.0";
 
-    public TypeScriptFetchClientCodegen() {
+    public TypeScriptFetchHttpClientCodegen() {
         super();
 
         // clear import mapping (from default generator) as TS does not use it
         // at the moment
         importMapping.clear();
 
-        outputFolder = "generated-code/typescript-fetch";
-        embeddedTemplateDir = templateDir = "TypeScript-Fetch";
+        outputFolder = "generated-code/typescript-fetch-httpclient";
+        embeddedTemplateDir = templateDir = "typescript-fetch-httpclient";
         this.cliOptions.add(new CliOption(NPM_NAME, "The name under which you want to publish generated npm package"));
         this.cliOptions.add(new CliOption(NPM_VERSION, "The version of your npm package"));
     }
@@ -55,12 +55,12 @@ public class TypeScriptFetchClientCodegen extends AbstractTypeScriptClientCodege
 
     @Override
     public String getName() {
-        return "typescript-fetch";
+        return "typescript-fetch-httpclient";
     }
 
     @Override
     public String getHelp() {
-        return "Generates a TypeScript client library using Fetch API (beta).";
+        return "Generates a TypeScript client library using Fetch API (beta) and HttpClient.";
     }
 
     public String getNpmName() {

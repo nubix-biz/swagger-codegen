@@ -2,11 +2,11 @@ package io.swagger.codegen.options;
 
 import com.google.common.collect.ImmutableMap;
 import io.swagger.codegen.CodegenConstants;
-import io.swagger.codegen.languages.TypeScriptFetchClientCodegen;
+import io.swagger.codegen.languages.TypeScriptFetchHttpClientCodegen;
 
 import java.util.Map;
 
-public class TypeScriptFetchClientOptionsProvider implements OptionsProvider {
+public class TypeScriptFetchHttpClientOptionsProvider implements OptionsProvider {
     public static final String SORT_PARAMS_VALUE = "false";
     public static final String ENSURE_UNIQUE_PARAMS_VALUE = "true";
     public static final Boolean SUPPORTS_ES6_VALUE = false;
@@ -18,7 +18,7 @@ public class TypeScriptFetchClientOptionsProvider implements OptionsProvider {
 
     @Override
     public String getLanguage() {
-        return "typescript-fetch";
+        return "typescript-fetch-httpclient";
     }
 
     @Override
@@ -28,8 +28,8 @@ public class TypeScriptFetchClientOptionsProvider implements OptionsProvider {
                 .put(CodegenConstants.ENSURE_UNIQUE_PARAMS, ENSURE_UNIQUE_PARAMS_VALUE)
                 .put(CodegenConstants.MODEL_PROPERTY_NAMING, MODEL_PROPERTY_NAMING_VALUE)
                 .put(CodegenConstants.SUPPORTS_ES6, String.valueOf(SUPPORTS_ES6_VALUE))
-                .put(TypeScriptFetchClientCodegen.NPM_NAME, NMP_NAME)
-                .put(TypeScriptFetchClientCodegen.NPM_VERSION, NMP_VERSION)
+                .put(TypeScriptFetchHttpClientCodegen.NPM_NAME, NMP_NAME)
+                .put(TypeScriptFetchHttpClientCodegen.NPM_VERSION, NMP_VERSION)
                 .put(CodegenConstants.ALLOW_UNICODE_IDENTIFIERS, ALLOW_UNICODE_IDENTIFIERS_VALUE)
                 .build();
     }
