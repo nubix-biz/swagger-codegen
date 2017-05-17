@@ -26,7 +26,7 @@ public class TypeScriptFetchHttpClientCodegen extends AbstractTypeScriptClientCo
         importMapping.clear();
 
         outputFolder = "generated-code/typescript-fetch-httpclient";
-        embeddedTemplateDir = templateDir = "typeScript-fetch-httpclient";
+        embeddedTemplateDir = templateDir = "typescript-fetch-httpclient";
         this.cliOptions.add(new CliOption(NPM_NAME, "The name under which you want to publish generated npm package"));
         this.cliOptions.add(new CliOption(NPM_VERSION, "The version of your npm package"));
     }
