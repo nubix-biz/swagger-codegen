@@ -16,6 +16,8 @@ export interface FetchAPI { (url: string, init?: any): Promise<any>; }
 
 const BASE_PATH = "{{{basePath}}}".replace(/\/+$/, "");
 
+const DEFAULT_CONFIG = new Configuration();
+
 /**
 * Used HTTP client.
 */
@@ -31,7 +33,7 @@ export class BaseAPI {
     fetch: FetchAPI;
     public configuration: Configuration;
 
-    constructor(fetch: FetchAPI = httpClient.fetch, basePath: string = BASE_PATH, configuration: Configuration = new Configuration()) {
+    constructor(fetch: FetchAPI = httpClient.fetch, basePath: string = BASE_PATH, configuration: Configuration = DEFAULT_CONFIG) {
         this.basePath = basePath;
         this.fetch = fetch;
         this.configuration = configuration;
@@ -229,7 +231,8 @@ export class {{classname}} extends BaseAPI {
      {{/allParams}}
      */
     {{nickname}}({{#hasParams}}params: { {{#allParams}} "{{paramName}}"{{^required}}?{{/required}}: {{{dataType}}};{{/allParams}} }, {{/hasParams}}options: any = {}) {
-        return {{classname}}Fp.{{nickname}}({{#hasParams}}params, {{/hasParams}}{{#hasAuthMethods}}this.configuration, {{/hasAuthMethods}}options)(this.fetch, this.basePath);
+        {{#hasAuthMethods}}const config = this.configuration || DEFAULT_CONFIG;
+        {{/hasAuthMethods}}return {{classname}}Fp.{{nickname}}({{#hasParams}}params, {{/hasParams}}{{#hasAuthMethods}}config, {{/hasAuthMethods}}options)(this.fetch, this.basePath);
     }
 {{/operation}}
 };
@@ -238,7 +241,7 @@ export class {{classname}} extends BaseAPI {
  * {{classname}} - factory interface{{#description}}
  * {{&description}}{{/description}}
  */
-export const {{classname}}Factory = function (fetch: FetchAPI, basePath?: string) {
+export const {{classname}}Factory = function (fetch: FetchAPI, basePath?: string, defaultConfig?: Configuration) {
     return {
 {{#operation}}
         /**
@@ -251,7 +254,8 @@ export const {{classname}}Factory = function (fetch: FetchAPI, basePath?: string
          {{/allParams}}
          */
         {{nickname}}({{#hasParams}}params: { {{#allParams}} "{{paramName}}"{{^required}}?{{/required}}: {{{dataType}}};{{/allParams}} }, {{/hasParams}}{{#hasAuthMethods}}configuration: Configuration, {{/hasAuthMethods}}options: any = {}) {
-            return {{classname}}Fp.{{nickname}}({{#hasParams}}params, {{/hasParams}}{{#hasAuthMethods}}configuration, {{/hasAuthMethods}}options)(fetch, basePath);
+            {{#hasAuthMethods}}const config = configuration || defaultConfig || DEFAULT_CONFIG;
+            {{/hasAuthMethods}}return {{classname}}Fp.{{nickname}}({{#hasParams}}params, {{/hasParams}}{{#hasAuthMethods}}config, {{/hasAuthMethods}}options)(fetch, basePath);
         },
 {{/operation}}
     };
